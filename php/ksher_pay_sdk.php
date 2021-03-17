@@ -46,7 +46,7 @@ EOD;
         $message = self::paramData( $data );
         $private_key = openssl_get_privatekey($this->privatekey);
         openssl_sign($message, $encoded_sign, $private_key,OPENSSL_ALGO_MD5);
-        openssl_free_key($private_key);
+        if (substr(PHP_VERSION,0,3)<=7) openssl_free_key($private_key); //php8.0弃用 改为自动释放
         $encoded_sign = bin2hex($encoded_sign);
         return $encoded_sign;
     }
@@ -58,7 +58,7 @@ EOD;
         $message = self::paramData( $data );
         $res = openssl_get_publickey($this->pubkey);
         $result = openssl_verify($message, $sign, $res,OPENSSL_ALGO_MD5);
-        openssl_free_key($res);
+        if (substr(PHP_VERSION,0,3)<=7) openssl_free_key($res); //php8.0弃用 改为自动释放
         return $result;
     }
     /**
