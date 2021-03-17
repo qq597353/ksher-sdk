@@ -84,6 +84,13 @@
                 </select>
             </div>
         </div>
+	<div class="group">
+            <label>付款类型： fee_type</label>
+            <div>
+                <label><input name="pc_h5" type="radio" value="PC" />PC</label> 
+                <label><input name="pc_h5" type="radio" value="H5" />H5</label> 
+            </div>
+        </div>
         <div class="group">
             <label>&nbsp;</label>
             <input type='hidden' name='action' value='gateway_pay' />
