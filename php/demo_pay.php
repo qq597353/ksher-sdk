@@ -44,7 +44,7 @@ if($action == 'native_pay'){
         'mch_redirect_url_fail' => 'http://www.ksher.cn',
         'product_name' => '商品名称',
         'refer_url' => 'http://www.ksher.cn',
-        'device' => 'PC');
+        'device' => $_POST['pc_h5']);
     $gateway_pay_response = $class->gateway_pay($gateway_pay_data);
     $gateway_pay_array = json_decode($gateway_pay_response, true);
     echo '<br />返回参数：<br />';
