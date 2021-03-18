@@ -81,18 +81,12 @@ EOD;
     public function _request($url, $data=array()){
         try {
             if(!empty($data) && is_array($data)){
-                $params = '';
                 $data['sign'] = $this->ksher_sign($data);
-                foreach($data as $temp_key =>$temp_value){
-                    $params .= ($temp_key."=".urlencode($temp_value)."&");
-                }
-                if(strpos($url, '?') === false){
-                    $url .= "?";
-                }
-                $url .= "&".$params;
             }
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_URL, $url); //get方法字符超出会报错
+	    curl_setopt($ch, CURLOPT_POST, 1); //post方式发送请求
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data); //post $data
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,FALSE);
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,FALSE);
             curl_setopt($ch, CURLOPT_HEADER, FALSE);
